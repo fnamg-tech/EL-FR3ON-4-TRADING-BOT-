@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EL FER3OON TRADING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body and Main Background */
+      body {
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0e27, #1a1f3a, #0f172a);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        position: relative;
+        padding: 20px;
+      }
+
+      /* Enhanced Animated Background */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+        animation: backgroundFlow 18s ease-in-out infinite;
+        z-index: -2;
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          linear-gradient(45deg, transparent 48%, rgba(139, 92, 246, 0.03) 50%, transparent 52%),
+          linear-gradient(-45deg, transparent 48%, rgba(236, 72, 153, 0.03) 50%, transparent 52%);
+        animation: gridMove 25s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes backgroundFlow {
+        0%, 100% { 
+          transform: rotate(0deg) scale(1);
+          opacity: 0.7;
+        }
+        33% { 
+          transform: rotate(120deg) scale(1.15);
+          opacity: 0.9;
+        }
+        66% { 
+          transform: rotate(240deg) scale(0.95);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes gridMove {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50px, 50px); }
+      }
+
+      /* Container Styles with Enhanced Animation */
+      .container {
+        max-width: 950px;
+        width: 100%;
+        padding: 50px;
+        background: rgba(10, 14, 39, 0.96);
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(139, 92, 246, 0.25);
+        border-radius: 28px;
+        box-shadow: 
+          0 30px 60px rgba(0, 0, 0, 0.8),
+          0 0 50px rgba(139, 92, 246, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transform: translateY(0);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .container.fade-out {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.98);
+      }
+
+      .container.fade-in {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Enhanced Border Animation */
+      .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #8b5cf6, #ec4899, transparent);
+        animation: borderScan 7s linear infinite;
+      }
+
+      .container::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ec4899, #8b5cf6, transparent);
+        animation: borderScanReverse 7s linear infinite;
+      }
+
+      @keyframes borderScan {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+
+      @keyframes borderScanReverse {
+        0% { right: -100%; }
+        100% { right: 100%; }
+      }
+
+      /* Welcome Screen Enhanced */
+      .welcome-header {
+        margin-bottom: 50px;
+      }
+
+      .brand-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #8b5cf6;
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        text-shadow: 
+          0 0 25px rgba(139, 92, 246, 0.6),
+          0 0 45px rgba(236, 72, 153, 0.4);
+        background: linear-gradient(135deg, #8b5cf6, #ec4899, #6366f1);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 4s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .welcome-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+        margin-bottom: 40px;
+        line-height: 1.8;
+      }
+
+      .professional-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.25));
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        border-radius: 50px;
+        color: #a78bfa;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Enhanced Contact Links with Telegram Icons */
+      .contact-links {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+      }
+
+      .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 35px;
+        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        color: white;
+        text-decoration: none;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.25);
+        min-width: 200px;
+      }
+
+      .contact-btn.admin {
+        background: linear-gradient(135deg, #ec4899, #db2777);
+        box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25);
+        border: 1px solid rgba(236, 72, 153, 0.4);
+      }
+
+      .contact-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+      }
+
+      .contact-btn:hover::before {
+        left: 100%;
+      }
+
+      .contact-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.35);
+      }
+
+      .contact-btn.admin:hover {
+        box-shadow: 0 20px 40px rgba(236, 72, 153, 0.35);
+      }
+
+      /* Telegram Icon SVG */
+      .telegram-icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      /* Header Styles */
+      h1 {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #8b5cf6;
+        margin-bottom: 40px;
+        letter-spacing: 2px;
+        text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+      }
+
+      /* Enhanced Input Styles */
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 22px 30px;
+        font-size: 1.2rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        border-radius: 16px;
+        border: 2px solid rgba(139, 92, 246, 0.25);
+        background: rgba(10, 14, 39, 0.85);
+        color: #ffffff;
+        margin-bottom: 25px;
+        transition: all 0.4s ease;
+        text-align: left;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        border-color: #8b5cf6;
+        background: rgba(10, 14, 39, 0.95);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+        transform: translateY(-2px);
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Enhanced Select and Button Styles */
+      .signal-count-container {
+        margin-bottom: 40px;
+      }
+
+      .signal-count-label {
+        display: block;
+        color: #8b5cf6;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+
+      select {
+        width: 100%;
+        padding: 22px 30px;
+        font-size: 1.2rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        border-radius: 16px;
+        border: 2px solid rgba(139, 92, 246, 0.25);
+        background: rgba(10, 14, 39, 0.85);
+        color: #ffffff;
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+
+      select:focus {
+        border-color: #8b5cf6;
+        background: rgba(10, 14, 39, 0.95);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+        transform: translateY(-2px);
+      }
+
+      select option {
+        background: #1a1f3a;
+        color: #ffffff;
+        padding: 15px;
+      }
+
+      /* Enhanced Button Styles */
+      .btn-primary {
+        padding: 22px 50px;
+        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        margin: 20px 0;
+        box-shadow: 0 15px 30px rgba(139, 92, 246, 0.35);
+        border: 1px solid rgba(139, 92, 246, 0.4);
+      }
+
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.45);
+      }
+
+      .btn-primary:active {
+        transform: translateY(-1px) scale(1.01);
+      }
+
+      /* Enhanced Loader Styles */
+      #loaderContainer {
+        display: none;
+        text-align: center;
+        margin: 40px 0;
+      }
+
+      #loader {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(139, 92, 246, 0.15);
+        border-top: 4px solid #8b5cf6;
+        border-right: 4px solid #ec4899;
+        border-radius: 50%;
+        animation: spin 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        margin: 25px auto;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loader-text {
+        color: #8b5cf6;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 15px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+      }
+
+      /* Enhanced Signal Box Styles - Larger Display Area */
+      .signal-box {
+        margin-top: 40px;
+        max-height: 750px;
+        overflow-y: auto;
+        padding: 35px;
+        background: rgba(10, 14, 39, 0.75);
+        border-radius: 24px;
+        border: 2px solid rgba(139, 92, 246, 0.25);
+        backdrop-filter: blur(20px);
+      }
+
+      .signal-box::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .signal-box::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+      }
+
+      .signal-box::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        border-radius: 10px;
+      }
+
+      .signals-header {
+        color: #8b5cf6;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      /* Enhanced Signal Card Styles */
+      .signal {
+        padding: 28px;
+        margin-bottom: 20px;
+        border-radius: 18px;
+        font-size: 1.05rem;
+        font-weight: 500;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 25px;
+        align-items: center;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-left: 4px solid;
+        opacity: 0;
+        transform: translateX(-30px);
+        animation: slideInSignal 0.6s ease-out forwards;
+      }
+
+      .signal:hover {
+        transform: translateX(5px) translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .call {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0.06));
+        color: #10b981;
+        border-left-color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
+      }
+
+      .put {
+        background: linear-gradient(135deg, rgba(244, 63, 94, 0.18), rgba(244, 63, 94, 0.06));
+        color: #f43f5e;
+        border-left-color: #f43f5e;
+        border: 1px solid rgba(244, 63, 94, 0.35);
+        box-shadow: 0 6px 18px rgba(244, 63, 94, 0.15);
+      }
+
+      @keyframes slideInSignal {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .signal-market {
+        font-size: 1.15rem;
+        font-weight: 700;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .signal-time {
+        font-size: 1.05rem;
+        opacity: 0.9;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.12);
+        padding: 8px 14px;
+        border-radius: 10px;
+      }
+
+      .signal-direction {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.18);
+        font-family: "JetBrains Mono", monospace;
+        backdrop-filter: blur(8px);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+          padding: 30px;
+          margin: 10px;
+        }
+
+        .brand-title {
+          font-size: 2.2rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 30px;
+        }
+
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .contact-btn {
+          width: 100%;
+          max-width: 320px;
+          justify-content: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+          padding: 18px 25px;
+          font-size: 1.1rem;
+        }
+
+        .btn-primary {
+          font-size: 1.1rem;
+          padding: 18px 35px;
+        }
+
+        .signal {
+          grid-template-columns: 1fr;
+          gap: 15px;
+          text-align: center;
+          padding: 22px;
+        }
+
+        .signal-box {
+          max-height: 500px;
+          padding: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="container fade-in">
+      <div class="welcome-header">
+        <div class="professional-badge">✨ Professional Trading Platform</div>
+        <h1 class="brand-title">EL FER3OON TRADING</h1>
+        <p class="welcome-subtitle">Advanced Signal Generator for Quotex Platform<br>Professional-Grade Trading Intelligence<br>🎯UTC +03:00<br>⚡MTG1</p>
+      </div>
+
+      <div class="contact-links">
+        <a href="https://t.me/elfr3on4trading" target="_blank" class="contact-btn">
+          <svg class="telegram-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.13-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+          Trading Channel
+        </a>
+        <a href="https://t.me/el_fer3oon" target="_blank" class="contact-btn admin">
+          <svg class="telegram-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.13-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+          Contact Admin
+        </a>
+      </div>
+
+      <button class="btn-primary" onclick="showLogin()">🚀GET STARTED</button>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login-container" class="container" style="display: none">
+      <h1>🔐 LOGIN</h1>
+      <input type="text" id="username" placeholder="Enter your username" />
+      <input type="password" id="password" placeholder="Enter your password" />
+      <button class="btn-primary" onclick="login()">🚀 Access Platform</button>
+    </div>
+
+    <!-- Signal Generation Section -->
+    <div id="signal-container" class="container" style="display: none">
+      <h1>📈 EL FER3OON SIGNALS</h1>
+      
+      <div class="signal-count-container">
+        <label class="signal-count-label">⚡ Number of Signals</label>
+        <select id="signalCount">
+          <option value="1">1 Signal</option>
+          <option value="2">2 Signals</option>
+          <option value="3">3 Signals</option>
+          <option value="4">4 Signals</option>
+          <option value="5">5 Signals</option>
+          <option value="6">6 Signals</option>
+          <option value="7">7 Signals</option>
+          <option value="8">8 Signals</option>
+          <option value="9">9 Signals</option>
+          <option value="10">10 Signals</option>
+          <option value="11">11 Signals</option>
+          <option value="12">12 Signals</option>
+          <option value="13">13 Signals</option>
+          <option value="14">14 Signals</option>
+          <option value="15">15 Signals</option>
+          <option value="16">16 Signals</option>
+          <option value="17">17 Signals</option>
+          <option value="18">18 Signals</option>
+          <option value="19">19 Signals</option>
+          <option value="20">20 Signals</option>
+          <option value="21">21 Signals</option>
+          <option value="22">22 Signals</option>
+          <option value="23">23 Signals</option>
+          <option value="24">24 Signals</option>
+          <option value="25">25 Signals</option>
+          <option value="26">26 Signals</option>
+          <option value="27">27 Signals</option>
+          <option value="28">28 Signals</option>
+          <option value="29">29 Signals</option>
+          <option value="30">30 Signals</option>
+        </select>
+      </div>
+
+      <button class="btn-primary" onclick="generateSignals()">🎯 Generate Trading Signals</button>
+
+      <div id="loaderContainer">
+        <div id="loader"></div>
+        <p class="loader-text">⚡ Analyzing Market Conditions...</p>
+      </div>
+
+      <div id="signalBox" class="signal-box">
+        <div class="signals-header">📊 Live Trading Signals</div>
+        <!-- Signals will be displayed here -->
+      </div>
+    </div>
+
+    <script>
+      // Enhanced page transition function
+      function transitionToPage(hideElement, showElement, callback = null) {
+        hideElement.classList.add('fade-out');
+        
+        setTimeout(() => {
+          hideElement.style.display = 'none';
+          hideElement.classList.remove('fade-out');
+          showElement.style.display = 'block';
+          
+          setTimeout(() => {
+            showElement.classList.add('fade-in');
+            if (callback) callback();
+          }, 50);
+        }, 300);
+      }
+
+      // Show login screen with smooth transition
+      function showLogin() {
+        const welcomeScreen = document.getElementById("welcome-screen");
+        const loginContainer = document.getElementById("login-container");
+        transitionToPage(welcomeScreen, loginContainer);
+      }
+
+      // Enhanced login logic with transition
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username === "FADY" && password === "FER3OON@2025#PRO") {
+          const loginContainer = document.getElementById("login-container");
+          const signalContainer = document.getElementById("signal-container");
+          transitionToPage(loginContainer, signalContainer);
+        } else {
+          // Enhanced error feedback
+          const loginContainer = document.getElementById("login-container");
+          loginContainer.style.animation = "shake 0.5s ease-in-out";
+          alert("❌ Invalid credentials. Please try again.");
+          setTimeout(() => {
+            loginContainer.style.animation = "";
+          }, 500);
+        }
+      }
+
+      // Add shake animation for error feedback
+      const shakeKeyframes = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          75% { transform: translateX(5px); }
+        }
+      `;
+      const style = document.createElement('style');
+      style.textContent = shakeKeyframes;
+      document.head.appendChild(style);
+
+      // Signal generation logic (enhanced)
+      const marketPairs = [
+        "GBP/AUD-OTC", "GBP/CAD-OTC", "NZD/CAD-OTC", "NZD/CHF-OTC", "NZD/JPY-OTC",
+        "USD/BDT-OTC", "USD/BRL-OTC", "USD/CHF-OTC", "USD/COP-OTC", "USD/DZD-OTC",
+        "USD/INR-OTC", "USD/NGN-OTC", "USD/PKR-OTC", "USD/TRY-OTC", "USD/ZAR-OTC",
+        "USD/MXN-OTC", "USD/ARS-OTC", "EUR/GBP-OTC", "EUR/JPY-OTC", "AUD/USD-OTC", "EUR/AUD-OTC",
+        "Bitcoin-OTC", "Gold-OTC", "Silver-OTC", "USCrude-OTC", "UKBrent-OTC",
+      ];
+
+      function generateSignal(market, signalTime) {
+        const direction = Math.random() < 0.5 ? "PUT" : "CALL";
+        return { market, time: signalTime, direction };
+      }
+
+      function generateFutureSignals(signalCount) {
+        const futureSignals = [];
+        let currentTime = new Date();
+
+        for (let i = 0; i < signalCount; i++) {
+          const market = marketPairs[Math.floor(Math.random() * marketPairs.length)];
+          const futureTime = new Date(
+            currentTime.getTime() + Math.floor(Math.random() * 8 + 2) * 60 * 1000
+          );
+          
+          // Convert to +03:00 timezone
+          const utcTime = futureTime.getTime() + (futureTime.getTimezoneOffset() * 60000);
+          const targetTime = new Date(utcTime + (3 * 3600000)); // +03:00
+          
+          const formattedTime = targetTime.toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+          const signal = generateSignal(market, formattedTime);
+          futureSignals.push(signal);
+          currentTime = futureTime;
+        }
+
+        return futureSignals;
+      }
+
+      // Enhanced signal generation with better animations
+      function generateSignals() {
+        const signalCount = parseInt(document.getElementById("signalCount").value);
+        const loaderContainer = document.getElementById("loaderContainer");
+        const signalBox = document.getElementById("signalBox");
+
+        // Show loader with enhanced animation
+        loaderContainer.style.display = "block";
+        loaderContainer.style.opacity = "0";
+        loaderContainer.style.transform = "translateY(20px)";
+        
+        setTimeout(() => {
+          loaderContainer.style.transition = "all 0.4s ease";
+          loaderContainer.style.opacity = "1";
+          loaderContainer.style.transform = "translateY(0)";
+        }, 100);
+
+        // Enhanced loading messages
+        const loadingMessages = [
+          "⚡ Analyzing Market Conditions...",
+          "📊 Processing Technical Indicators...",
+          "🎯 Generating Optimal Entry Points...",
+          "🔥 Finalizing Trading Signals..."
+        ];
+        
+        let messageIndex = 0;
+        const loaderText = document.querySelector('.loader-text');
+        
+        const messageInterval = setInterval(() => {
+          messageIndex = (messageIndex + 1) % loadingMessages.length;
+          loaderText.textContent = loadingMessages[messageIndex];
+        }, 1200);
+
+        setTimeout(() => {
+          clearInterval(messageInterval);
+          
+          // Hide loader with animation
+          loaderContainer.style.opacity = "0";
+          loaderContainer.style.transform = "translateY(-20px)";
+          
+          setTimeout(() => {
+            loaderContainer.style.display = "none";
+          }, 400);
+
+          // Clear and setup signal box
+          signalBox.innerHTML = '<div class="signals-header">📊 Live Trading Signals</div>';
+          signalBox.style.opacity = "0";
+          signalBox.style.transform = "translateY(20px)";
+          
+          setTimeout(() => {
+            signalBox.style.transition = "all 0.4s ease";
+            signalBox.style.opacity = "1";
+            signalBox.style.transform = "translateY(0)";
+          }, 100);
+
+          const signals = generateFutureSignals(signalCount);
+
+          // Display signals with staggered animation
+          signals.forEach((signal, index) => {
+            setTimeout(() => {
+              const signalDiv = document.createElement("div");
+              signalDiv.classList.add("signal", signal.direction.toLowerCase());
+              signalDiv.style.animationDelay = `${index * 0.1}s`;
+              
+              const directionIcon = signal.direction === "CALL" ? "📈" : "📉";
+              const signalIcon = signal.direction === "CALL" ? "🟢" : "🔴";
+              
+              signalDiv.innerHTML = `
+                <div class="signal-market">${signalIcon} ${signal.market}</div>
+                <div class="signal-time">⏰ ${signal.time}</div>
+                <div class="signal-direction">${directionIcon} ${signal.direction}</div>
+              `;
+              signalBox.appendChild(signalDiv);
+
+              // Add sound effect simulation (visual feedback)
+              signalDiv.addEventListener('animationend', () => {
+                signalDiv.style.boxShadow = signal.direction === "CALL" ? 
+                  "0 0 20px rgba(16, 185, 129, 0.35)" : 
+                  "0 0 20px rgba(244, 63, 94, 0.35)";
+                setTimeout(() => {
+                  signalDiv.style.boxShadow = "";
+                }, 1000);
+              });
+
+            }, index * 200);
+          });
+        }, 6000);
+      }
+
+      // Enhanced keyboard shortcuts
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          const welcomeScreen = document.getElementById("welcome-screen");
+          const loginContainer = document.getElementById("login-container");
+          const signalContainer = document.getElementById("signal-container");
+          
+          if (welcomeScreen.style.display !== 'none') {
+            showLogin();
+          } else if (loginContainer.style.display !== 'none') {
+            login();
+          } else if (signalContainer.style.display !== 'none') {
+            generateSignals();
+          }
+        }
+      });
+
+      // Add dynamic background particles
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+          position: fixed;
+          width: 4px;
+          height: 4px;
+          background: radial-gradient(circle, rgba(139, 92, 246, 0.8), transparent);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: -1;
+          animation: particleFloat 8s linear infinite;
+        `;
+        
+        const startX = Math.random() * window.innerWidth;
+        particle.style.left = startX + 'px';
+        particle.style.top = '100vh';
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 8000);
+      }
+
+      // Add particle animation keyframes
+      const particleKeyframes = `
+        @keyframes particleFloat {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+      `;
+      const particleStyle = document.createElement('style');
+      particleStyle.textContent = particleKeyframes;
+      document.head.appendChild(particleStyle);
+
+      // Create particles periodically
+      setInterval(createParticle, 2000);
+
+      // Enhanced focus management
+      document.addEventListener('DOMContentLoaded', function() {
+        const firstInput = document.querySelector('input');
+        if (firstInput) {
+          setTimeout(() => firstInput.focus(), 1000);
+        }
+      });
+
+    </script>
+  </body>
+</html>
